@@ -3,21 +3,18 @@
     public static class NumberUtils
     {
         /// <summary>
-        /// Turns number into array of digits.
+        /// Turns number into an ienumerable of digits.
         /// </summary>
         /// <param name="num"></param>
-        /// <returns>A byte array representing the digits of the number.</returns>
-        public static int[] GetDigits(this int num)
+        /// <returns>A byte ienumerable representing the digits of the number</returns>
+        public static IEnumerable<byte> GetDigits(int num)
         {
-            int[] result = new int[(int)Math.Floor(Math.Log10(num) + 1)];
-
-            for (int i = result.Length - 1; i >= 0; --i)
+            num = Math.Abs(num);
+            while (num != 0)
             {
-                result[i] = num % 10;
+                yield return num % 10;
                 num /= 10;
             }
-
-            return result;
         }
 
         /// <summary>
